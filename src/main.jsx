@@ -3,11 +3,14 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import ThemeProvider from './context/ThemeContext.jsx'
+import ChatProvider from './context/ChatContext.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <ThemeProvider>
-    <StrictMode>
-      <App />
-    </StrictMode>
-  </ThemeProvider>,
+  <ChatProvider>
+    <ThemeProvider>
+      <StrictMode>
+        <App />
+      </StrictMode>
+    </ThemeProvider>
+  </ChatProvider>,
 )

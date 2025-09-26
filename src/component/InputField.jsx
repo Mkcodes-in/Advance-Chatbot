@@ -1,10 +1,12 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { BsArrowUp, BsPaperclip } from 'react-icons/bs';
+import UseChat from '../hooks/UseChat';
 
-export default function InputFeild() {
+export default function InputField() {
     const [message, setMessage] = useState('');
     const textareaRef = useRef(null);
-    
+    const {state, dispatch} = UseChat();
+
     const handleInputChange = (e) => {
         setMessage(e.target.value);
         const textArea = textareaRef.current;
@@ -13,6 +15,7 @@ export default function InputFeild() {
     };
 
     const handleSubmit = () => {
+        dispatch({type: "SET_MSG", payload: message});
         if (message.trim()) {
             console.log('Message sent:', message);
             setMessage('');
@@ -27,42 +30,38 @@ export default function InputFeild() {
     };
 
     return (
-        <div className='relative max-w-4xl mx-auto p-4'>
-            <div className='relative bg-[#303030] text-white pb-14 shadow-lg rounded-xl '>
+        <div className='w-full p-4 pt-2 bg-transparent'>
+            <div
+                ref={textareaRef}
+                className='relative bg-[#303030] text-white pb-14 shadow-lg rounded-xl w-full max-w-3xl mx-auto'
+            >
                 <textarea
-                    ref={textareaRef}
                     value={message}
                     onChange={handleInputChange}
                     onKeyPress={handleKeyPress}
                     placeholder='Ask me anything...'
-                    className='w-full py-4 px-6 min-h-0 text-lg resize-none border-none outline-none pr-16 pl-5 transition-all duration-200'
+                    className='w-full py-4 px-6 min-h-0 text-lg resize-none border-none outline-none pr-16 pl-5 transition-all duration-200 bg-transparent'
                     rows={1}
                 />
-                
-                {/* File Upload Button with Icon */}
-                <label 
-                    htmlFor="file" 
+
+                {/* File Upload */}
+                <label
+                    htmlFor="file"
                     className='absolute bottom-4 left-3 p-2 rounded-full bg-gray-600 hover:bg-gray-500 text-white cursor-pointer transition-colors duration-200'
                     title="Upload file"
                 >
                     <BsPaperclip className="text-lg" />
                 </label>
-                <input 
-                    className='hidden'
-                    type="file" 
-                    name="file" 
-                    id="file" 
-                />
-                
+                <input className='hidden' type="file" id="file" />
+
                 {/* Send Button */}
                 <button
                     onClick={handleSubmit}
                     disabled={!message.trim()}
-                    className={`absolute bottom-4 right-3 p-2 rounded-full transition-all duration-200 ${
-                        message.trim() 
-                            ? 'bg-gray-50 text-black hover:bg-white cursor-pointer' 
+                    className={`absolute bottom-4 right-3 p-2 rounded-full transition-all duration-200 ${message.trim()
+                            ? 'bg-gray-50 text-black hover:bg-white cursor-pointer'
                             : 'bg-gray-600 text-gray-400 cursor-not-allowed'
-                    }`}
+                        }`}
                 >
                     <BsArrowUp className="text-lg font-bold" />
                 </button>
