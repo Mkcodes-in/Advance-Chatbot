@@ -8,15 +8,17 @@ export default function Header() {
     const { theme, handleTheme } = UseTheme();
 
     return (
-        <nav className='p-2 max-w-7xl mx-auto'>
+        <nav className='max-w-7xl mx-auto pr-4 py-1'>
             <div className='flex justify-between items-center'>
                 <a
                     className='flex items-center text-2xl text-gray-300'
                     href="#">
-                    <img
-                        className='h-20 w-20 object-cover'
+                    <div>
+                        <img
+                        className='size-20 object-cover'
                         src={logo}
                         alt="logo-png" />
+                    </div>
                     Chat2PDF
                 </a>
                 <div className='flex items-center space-x-6'>
