@@ -33,7 +33,7 @@ export default function InputField() {
         <div className='w-full p-4 pt-2 bg-transparent'>
             <div
                 ref={textareaRef}
-                className='relative bg-[#303030] text-white pb-14 shadow-lg rounded-xl w-full max-w-3xl mx-auto'
+                className='relative bg-[#303030] text-white pb-14 shadow-xl rounded-3xl w-full max-w-3xl mx-auto'
             >
                 <textarea
                     value={message}
